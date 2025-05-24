@@ -20,11 +20,7 @@ export async function getCabin(id) {
 }
 
 export async function getCabinPrice(id) {
-  const { data, error } = await supabase
-    .from('cabins')
-    .select('regularPrice, discount')
-    .eq('id', id)
-    .single();
+  const { data, error } = await supabase.from('cabins').select('regularPrice, discount').eq('id', id).single();
 
   if (error) {
     console.error(error);
@@ -167,7 +163,7 @@ export async function createBooking(newBooking) {
 
 /////////////
 // UPDATE
-
+/*
 // The updatedFields is an object which should ONLY contain the updated data
 export async function updateGuest(id, updatedFields) {
   const { data, error } = await supabase
@@ -211,3 +207,4 @@ export async function deleteBooking(id) {
   }
   return data;
 }
+  */
