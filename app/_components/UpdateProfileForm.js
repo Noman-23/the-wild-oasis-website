@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { updateProfile } from '../_lib/actions';
 import { useFormStatus } from 'react-dom';
+import Image from 'next/image';
 
 export default function UpdateProfileForm({ guest, children }) {
   const [count, setCount] = useState();
@@ -35,11 +36,14 @@ export default function UpdateProfileForm({ guest, children }) {
       <div className='space-y-2'>
         <div className='flex items-center justify-between'>
           <label htmlFor='nationality'>Where are you from?</label>
-          <img
-            src={countryFlag}
-            alt='Country flag'
-            className='h-5 rounded-sm'
-          />
+          <div className='relative h-5 aspect-video rounded-sm'>
+            <Image
+              src={countryFlag}
+              alt={`Country flag of ${nationality}`}
+              fill
+              className='object-cover'
+            />
+          </div>
         </div>
 
         {children}
@@ -63,7 +67,6 @@ export default function UpdateProfileForm({ guest, children }) {
 
 function Button() {
   const { method, pending, data, action } = useFormStatus();
-  console.log({ method, pending, data, action });
   return (
     <button
       className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'
